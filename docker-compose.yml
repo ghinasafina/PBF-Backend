@@ -1,0 +1,68 @@
+version: "3.8"
+
+services:
+  # Service untuk Laravel
+  laravel:
+    build:
+      context: ./laravel-app
+      dockerfile: Dockerfile
+    container_name: laravel_app
+    volumes:
+      - ./laravel-app:/var/www/html
+    ports:
+      - "8000:80"
+    depends_on:
+      - mysql
+    environment:
+      - APP_ENV=local
+      - DB_HOST=mysql
+      - DB_DATABASE=laravel_db
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+
+  # Service untuk CodeIgniter
+  codeigniter:
+    build:
+      context: ./codeigniter-app
+      dockerfile: Dockerfile
+    container_name: codeigniter_app
+    volumes:
+      - ./codeigniter-app:/var/www/html
+    ports:
+      - "8001:80"
+    depends_on:
+      - mysql
+    environment:
+      - DB_HOST=mysql
+      - DB_DATABASE=codeigniter_db
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+
+  # Service untuk MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  # phpMyAdmin untuk manajemen database
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: root
+
+volumes:
+  mysql_data:
