@@ -1,0 +1,15 @@
+FROM php:7.4-apache
+
+# Install ekstensi yang dibutuhkan
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+# Clone kode dari GitHub
+WORKDIR /var/www/html
+ARG BACKEND_REPO
+RUN git clone ${BACKEND_REPO} .
+RUN chmod -R 777 /var/www/html
+
+# Expose port
+EXPOSE 80
+
+CMD ["apache2-foreground"]
