@@ -60,7 +60,7 @@ https://drive.google.com/file/d/1EjKNxOrKj8vFCkhieK7waPv574I3Szem/view?usp=shari
 
 ## 6. Membuat Model & Controller
 Buat Model dan Controller sesuai dengan database yang ada. Seperti Dosen, Mahasiswa, Mata Kuliah, Detail Nilai, Nilai-Nilai \
-Berikut salah satu contoh Model dan Controller-nya \
+Berikut salah satu contoh Model dan Controller-nya
 ### Dosen Model
 ```php
 class DosenModel extends Model
