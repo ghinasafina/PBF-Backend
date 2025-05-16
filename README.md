@@ -1,68 +1,99 @@
-# CodeIgniter 4 Application Starter
+# PBF BACKEND
 
-## What is CodeIgniter?
+## 1. Tools Yang Digunakan
+### CodeIgniter Versi 4
+Link download CodeIgniter :
+```php
+https://codeigniter.com/download
+```
+### Composer
+Link download Composer :
+```php
+https://getcomposer.org/download/
+```
+### Postman
+Link donwload Postman :
+```php
+https://www.postman.com/downloads/
+```
+### PhpMyAdmin
+Link PhpMyAdmin :
+```php
+http://localhost/phpmyadmin
+```
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+## 2. Clone Repository
+Clone repository ini ke dalam direktori lokal :
+```php
+git clone https://github.com/ghinasafina/PBF-Backend.git
+```
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## 3. Install Composer
+Pastikan kamu sudah memiliki Composer yang terinstal. Lalu jalankan command berikut melalui terminal VS Code untuk menambahkan composer ke dalam code :
+```php
+composer install
+```
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+## 4. Konfigurasi Environment
+Edit file .env dan sesuaikan dengan koneksi database lokal kamu:
+```php
+database.default.hostname = localhost
+database.default.database = "nama_database_anda"
+database.default.username = root
+database.default.password = 
+```
+Jangan lupa mengganti CI_Environment nya dari :
+```php
+CI_ENVIRONMENT = production
+```
+Menjadi :
+```php
+CI_ENVIRONMENT = development
+```
+Agar bisa menampilkan error ketika kita salah/typo saat mengerjakan projectnya
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+## 5. Membuat Database dan Import Database
+Download Databasenya melalui link dibawah ini :
+```php
+https://drive.google.com/file/d/1EjKNxOrKj8vFCkhieK7waPv574I3Szem/view?usp=sharing
+```
 
-## Installation & updates
+## 6. Menjalankan Server Development
+Jalankan server CodeIgniter dengan command:
+```php
+php spark serve
+```
+Server akan berjalan di http://localhost:8080
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+## 7. Cek Endpoint API Menggunakan Postman
+Gunakan Postman untuk mengetes endpoint berikut:
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+Dosen \
+GET → http://localhost:8080/api/dosen (Untuk menampilkan seluruh data dosen yang ada) \
+POST → http://localhost:8080/api/dosen (Untuk menambahkan data dosen) \
+PUT → http://localhost:8080/api/dosen/$1 (Untuk megedit data dosen dengan ID DOSEN yang ingin kita edit) \
+DELETE → http://localhost:8080/api/dosen/$1 (Untuk menghapus data dosen dengan ID DOSEN yang ingin kita hapus)
 
-## Setup
+Mahasiswa \
+GET → http://localhost:8080/api/mahasiswa (Untuk menampilkan seluruh data mahasiswa yang ada) \
+POST → http://localhost:8080/api/mahasiswa (Untuk menambahkan data mahasiswa) \
+PUT → http://localhost:8080/api/mahasiswa/$1 (Untuk megedit data mahasiswa dengan NPM yang ingin kita edit) \
+DELETE → http://localhost:8080/api/mahasiswa/$1 (Untuk menghapus data mahasiswa dengan NPM yang ingin kita hapus)
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+Detail Nilai \
+GET → http://localhost:8080/api/nilai (Untuk menampilkan seluruh data detail nilai mahasiswa yang ada) \
+POST → http://localhost:8080/api/nilai (Untuk menambahkan data detail nilai mahasiswa) \
+PUT → http://localhost:8080/api/nilai/$1 (Untuk megedit data detail nilai mahasiswa dengan ID DETAIL yang ingin kita edit) \
+DELETE → http://localhost:8080/api/nilai/$1 (Untuk menghapus data detail nilai mahasiswa dengan ID DETAIL yang ingin kita hapus)
 
-## Important Change with index.php
+Nilai-Nilai \
+GET → http://localhost:8080/api/nilainilai (Untuk menampilkan seluruh data nilai akhir mahasiswa yang ada) \
+POST → http://localhost:8080/api/nilainilai (Untuk menambahkan data nilai akhir mahasiswa) \
+PUT → http://localhost:8080/api/nilainilai/$1 (Untuk megedit data nilai akhir mahasiswa dengan ID NILAI yang ingin kita edit) \
+DELETE → http://localhost:8080/api/nilainilai/$1 (Untuk menghapus data nilai akhir mahasiswa dengan ID NILAI yang ingin kita hapus)
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
-
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
-
-**Please** read the user guide for a better explanation of how CI4 works!
-
-## Repository Management
-
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
-
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
-
-## Server Requirements
-
-PHP version 8.1 or higher is required, with the following extensions installed:
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+Matkul \
+GET → http://localhost:8080/api/matkul (Untuk menampilkan seluruh mata kuliah yang ada) \
+POST → http://localhost:8080/api/matkul (Untuk menambahkan mata kuliah) \
+PUT → http://localhost:8080/api/matkul/$1 (Untuk megedit mata kuliah dengan ID MATKUL yang ingin kita edit) \
+DELETE → http://localhost:8080/api/matkul/$1 (Untuk menghapus mata kuliah dengan ID MATKUL yang ingin kita hapus)
